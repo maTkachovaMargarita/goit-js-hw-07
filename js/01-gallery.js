@@ -30,8 +30,6 @@ imageContainer.addEventListener("click", onImageClick);
 function onImageClick(e) {
     e.preventDefault();
 
-    console.log(e);
-
     if (e.target.nodeName !== "IMG") {
         return;
     }
@@ -42,9 +40,11 @@ function onImageClick(e) {
 
     instance.show();
 
-    imageContainer.addEventListener("keydown", (evt) => {
+   const listener = imageContainer.addEventListener("keydown", (evt) => {
         if (evt.code === "Escape") {
             instance.close();
+            this.removeEventListener("keydown", listener);
         }
     });
 }
+
